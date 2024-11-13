@@ -23,7 +23,7 @@ cron.schedule("* * * * *", async () => {
         await git.add("./*");
 
         // 提交更改
-        await git.commit("style: 定时自动提交 :technologist:");
+        await git.commit("style: 定时自动提交  🧐");
 
         // 推送到远程仓库
         await git.push("origin", "master"); // 替换为你的分支名
