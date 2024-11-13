@@ -5,7 +5,8 @@ const path = require('path');
 const fs = require("fs");
 // 初始化 simple-git
 const git = simpleGit(); // 替换为你的 Git 仓库路径
-const repoPath = path.join(__dirname,'../')
+const repoPath = path.join(__dirname)
+console.log(repoPath,111)
 let fileId = 0;
 // 定义定时任务，每小时执行一次
 //cron.schedule("0 * * * *", async () => {
@@ -18,7 +19,7 @@ let fileId = 0;
       } else {
         await git.cwd(repoPath)
         // 添加所有更改的文件
-        await git.add('*');
+        await git.add('./*');
 
         // 提交更改
         await git.commit("定时推送: 自动提交");
