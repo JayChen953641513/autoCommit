@@ -2,7 +2,7 @@ const cron = require("node-cron");
 const simpleGit = require("simple-git");
 const path = require("path");
 const fs = require("fs");
-const git = simpleGit(); // 替换为你的 Git 仓库路径
+const git = simpleGit();
 const repoPath = path.join(__dirname);
 let fileFlag = true;
 // 定义定时任务，每小时执行一次
@@ -16,14 +16,9 @@ cron.schedule("0 * * * *", async () => {
       } else {
         fileFlag = !fileFlag;
         await git.cwd(repoPath);
-        // 添加所有更改的文件
         await git.add("./*");
-
-        // 提交更改
         await git.commit("style: 定时自动提交  🧐");
-
-        // 推送到远程仓库
-        await git.push("origin", "master"); // 替换为你的分支名
+        await git.push("origin", "master");
       }
     });
 
