@@ -6,7 +6,7 @@ const git = simpleGit();
 const repoPath = path.join(__dirname);
 let fileFlag = true;
 // 定义定时任务，每小时执行一次
-//cron.schedule("0 * * * *", async () => {
+cron.schedule("0 * * * *", async () => {
   try {
     console.log("开始推送代码到 git...");
     const fileName = `./testAutoCommit.txt`;
@@ -26,6 +26,6 @@ let fileFlag = true;
   } catch (error) {
     console.error("推送失败:", error);
   }
-//});
+});
 
 console.log("定时推送服务已启动...");
