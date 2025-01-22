@@ -1,5 +1,5 @@
 const gitUserName='youUserName'
 const gitUserEmail='youUserEmail'
-module.export  =  {
+module.exports  =  {
     gitUserName,gitUserEmail
 }
