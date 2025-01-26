@@ -8,8 +8,10 @@ const repoPath = path.join(__dirname);
 git.addConfig("user.name", config.gitUserName);
 git.addConfig("user.email", config.gitUserEmail);
 let fileFlag = true;
-// 定义定时任务，每小时执行一次
-//cron.schedule("0 * * * *", async () => {
+// 定义定时任务，每小时执行一次 
+//一分钟一次：* * * * * *
+//一小时一次: 0 * * * *
+cron.schedule("* * * * * *", async () => {
   try {
     console.log("开始推送代码到 git...");
     const fileName = `./testAutoCommit.txt`;
@@ -32,6 +34,6 @@ let fileFlag = true;
   } catch (error) {
     console.error("推送失败:", error);
   }
-//});
+});
 
 console.log("定时推送服务已启动...");
