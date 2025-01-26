@@ -9,7 +9,7 @@ git.addConfig("user.name", config.gitUserName);
 git.addConfig("user.email", config.gitUserEmail);
 let fileFlag = true;
 // 定义定时任务，每小时执行一次 
-//一分钟一次：* * * * * *
+//一分钟一次：0 * * * * *
 //一小时一次: 0 * * * *
 cron.schedule("0 * * * *", async () => {
   try {
