@@ -11,7 +11,7 @@ let fileFlag = true;
 // 定义定时任务，每小时执行一次 
 //一分钟一次：* * * * * *
 //一小时一次: 0 * * * *
-cron.schedule("* * * * * *", async () => {
+cron.schedule("0 * * * *", async () => {
   try {
     console.log("开始推送代码到 git...");
     const fileName = `./testAutoCommit.txt`;
