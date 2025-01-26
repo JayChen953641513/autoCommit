@@ -9,7 +9,7 @@ git.addConfig("user.name", config.gitUserName);
 git.addConfig("user.email", config.gitUserEmail);
 let fileFlag = true;
 // 定义定时任务，每小时执行一次
-cron.schedule("0 * * * *", async () => {
+//cron.schedule("0 * * * *", async () => {
   try {
     console.log("开始推送代码到 git...");
     const fileName = `./testAutoCommit.txt`;
@@ -21,7 +21,9 @@ cron.schedule("0 * * * *", async () => {
         await git.cwd(repoPath);
         await git.add("./*");
         await git.commit("style: 定时自动提交  🧐");
-        await git.push("origin", "master");
+        await git.push("origin", "master").catch((err)=>{
+            console.log("提交代码失败:",err)
+        });
         console.log("代码推送成功！");
       }
     });
@@ -30,6 +32,6 @@ cron.schedule("0 * * * *", async () => {
   } catch (error) {
     console.error("推送失败:", error);
   }
-});
+//});
 
 console.log("定时推送服务已启动...");
