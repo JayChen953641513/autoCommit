@@ -24,7 +24,7 @@ let autoSubmitCount = 1
 //   if (hour > autoSubmitCount) { 
 //     return 
 //   }
-//try {
+try {
   console.log(to,111)
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async (err) => {
@@ -52,9 +52,9 @@ let autoSubmitCount = 1
         // console.log("代码推送成功！");
       }
     });
-  // } catch (error) {
-  //   console.error("推送失败:", error);
-  // }
+  } catch (error) {
+    console.error("推送失败:", error);
+  }
 //});
 //随机数范围 [min , max]
 const random = (min, max) => {
