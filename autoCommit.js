@@ -10,7 +10,7 @@ git.addConfig("user.name", config.gitUserName);
 git.addConfig("user.email", config.gitUserEmail);
 const fileName = `./testAutoCommit.txt`;
 let fileFlag = true;
-//每天提交次数,将于每日0点更新该数 5 < num < 15
+//每天提交次数,将于每日0点更新该数 1 < num < 24
 let autoSubmitCount = 1
 // 定义定时任务，每小时执行一次 
 //一分钟一次：0 * * * * *
@@ -19,7 +19,7 @@ cron.schedule("0 * * * *", async () => {
   const hour = new Date().getHours()
   console.log("当前时间:", hour, "点")
   if (hour === 0) {
-    autoSubmitCount = random(5, 15)
+    autoSubmitCount = random(1, 24)
   }
   if (hour > autoSubmitCount) {
     return
