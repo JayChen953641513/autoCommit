@@ -19,7 +19,7 @@ cron.schedule("0 * * * *", async () => {
   const hour = new Date().getHours()
   console.log("当前时间:", hour, "点")
   if (hour === 0) {
-    autoSubmitCount = random(1, 24)
+    autoSubmitCount = random(1, 23)
   }
   if (hour > autoSubmitCount) {
     return
