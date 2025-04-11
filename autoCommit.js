@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const git = simpleGit();
 const config = require("./config")
-const to = require("await-to-js").default;
+const to = require("await-to-js").default
 const repoPath = path.join(__dirname);
 git.addConfig("user.name", config.gitUserName);
 git.addConfig("user.email", config.gitUserEmail);
@@ -25,45 +25,39 @@ let autoSubmitCount = 1
 //     return 
 //   }
 //try {
-console.log(to, 111)
-console.log("开始推送代码到 git...");
-fs.writeFile(fileName, String(fileFlag), async (err) => {
-  if (err) {
-    console.error("创建文件时出错:", err);
+  console.log(to,111)
+    console.log("开始推送代码到 git...");
+    fs.writeFile(fileName, String(fileFlag), async (err) => {
+      if (err) {
+        console.error("创建文件时出错:", err);
+      } else {
+        fileFlag = !fileFlag;
+        const [ cwdErr ] = await to(git.cwd(repoPath))
+        if (cwdErr) { console.log("初始化代码失败:",err) }
+        
+        const [ addErr ] = await to(git.add("./*"))
+        if (addErr) { console.log("添加代码失败:",err) }
+        
+        const [ commitErr ] = await to(git.commit("style: 定时自动提交  🧐"))
+        if (commitErr) { console.log("提交代码失败:",err) }
 
-  }
-});
-async function asyncTask(cb) {
-    fileFlag = !fileFlag;
-    const [cwdErr] = await to(git.cwd(repoPath))
-    if (cwdErr) { console.log("初始化代码失败:", err) }
-
-    const [addErr] = await to(git.add("./*"))
-    if (addErr) { console.log("添加代码失败:", err) }
-
-    const [commitErr] = await to(git.commit("style: 定时自动提交  🧐"))
-    if (commitErr) { console.log("提交代码失败:", err) }
-
-    const [pushErr] = await to(git.push("origin", "master"))
-    if (pushErr) { console.log("推送代码失败:", err) }
-    cb(null, savedTask);
-  }
-asyncTask()
-
-// await git.cwd(repoPath);
-// await git.add("./*");
-// await git.commit("style: 定时自动提交  🧐");
-// await git.push("origin", "master").catch((err)=>{
-//     console.log("提交代码失败:",err)
-// });
-// console.log("代码推送成功！");
-
-// } catch (error) {
-//   console.error("推送失败:", error);
-// }
+        const [ pushErr ] = await to(git.push("origin", "master"))
+        if (pushErr) { console.log("推送代码失败:",err) }
+        // await git.cwd(repoPath);
+        // await git.add("./*");
+        // await git.commit("style: 定时自动提交  🧐");
+        // await git.push("origin", "master").catch((err)=>{
+        //     console.log("提交代码失败:",err)
+        // });
+        // console.log("代码推送成功！");
+      }
+    });
+  // } catch (error) {
+  //   console.error("推送失败:", error);
+  // }
 //});
 //随机数范围 [min , max]
 const random = (min, max) => {
-  return Math.floor((max + 1 - min) * Math.random() + min)
+    return Math.floor((max + 1 - min) * Math.random() + min)
 }
 console.log("定时推送服务已启动...");
