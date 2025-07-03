@@ -28,7 +28,7 @@ let autoSubmitCount = 1
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async (err) => {
       if (err) {
-        console.error("创建文件时出错:", err);
+        console.error("创建文件时出错:", err);x
       } else {
         fileFlag = !fileFlag;
         const [cwdErr] = await to(git.cwd(repoPath))
@@ -54,7 +54,7 @@ let autoSubmitCount = 1
   } catch (error) {
     console.error("推送失败:", error);
   }
-//});
+// });
 //随机数范围 [min , max]
 const random = (min, max) => {
   return Math.floor((max + 1 - min) * Math.random() + min)
