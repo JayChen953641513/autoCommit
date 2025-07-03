@@ -15,15 +15,15 @@ let autoSubmitCount = 1
 // 定义定时任务，每小时执行一次 
 //一分钟一次：0 * * * * *
 //一小时一次: 0 * * * *
-cron.schedule("0 * * * *", async () => {
-  const hour = new Date().getHours()
-  console.log("当前时间:", hour, "点")
-  if (hour === 0) {
-    autoSubmitCount = random(1, 23)
-  }
-  if (hour > autoSubmitCount) {
-    return
-  }
+// cron.schedule("0 * * * *", async () => {
+//   const hour = new Date().getHours()
+//   console.log("当前时间:", hour, "点")
+//   if (hour === 0) {
+//     autoSubmitCount = random(1, 23)
+//   }
+//   if (hour > autoSubmitCount) {
+//     return
+//   }
   try {
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async (err) => {
@@ -54,7 +54,7 @@ cron.schedule("0 * * * *", async () => {
   } catch (error) {
     console.error("推送失败:", error);
   }
-});
+//});
 //随机数范围 [min , max]
 const random = (min, max) => {
   return Math.floor((max + 1 - min) * Math.random() + min)
