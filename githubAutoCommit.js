@@ -15,6 +15,8 @@ let autoSubmitCount = 1
 // 定义定时任务，每小时执行一次 
 //一分钟一次：0 * * * * *
 //一小时一次: 0 * * * *
+
+
 // cron.schedule("0 * * * *", async () => {
 //   const hour = new Date().getHours()
 //   console.log("当前时间:", hour, "点")
@@ -24,6 +26,8 @@ let autoSubmitCount = 1
 //   if (hour > autoSubmitCount) {
 //     return
 //   }
+  
+  
   try {
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async (err) => {
