@@ -11,28 +11,28 @@ git.addConfig("user.email", config.gitUserEmail);
 const fileName = `./testAutoCommit.txt`;
 let fileFlag = true;
 //每天提交次数,将于每日0点更新该数 1 < num < 24
-let autoSubmitCount = 1
+let autoSubmitCount = 23
 // 定义定时任务，每小时执行一次 
 //一分钟一次：0 * * * * *
 //一小时一次: 0 * * * *
 
 
-// cron.schedule("0 * * * *", async () => {
-//   const hour = new Date().getHours()
-//   console.log("当前时间:", hour, "点")
-//   if (hour === 0) {
-//     autoSubmitCount = random(1, 23)
-//   }
-//   if (hour > autoSubmitCount) {
-//     return
-//   }
+//cron.schedule("0 * * * *", async function ()  {
+  const hour = new Date().getHours()
+  console.log("当前时间:", hour, "点")
+  if (hour === 0) {
+    autoSubmitCount = random(1, 23)
+  }
+  if (hour > autoSubmitCount) {
+    return
+  }
   
   
   try {
     console.log("开始推送代码到 git...");
-    fs.writeFile(fileName, String(fileFlag), async (err) => {
+    fs.writeFile(fileName, String(fileFlag), async function(err) {
       if (err) {
-        console.error("创建文件时出错:", err);x
+        console.error("创建文件时出错:", err);
       } else {
         fileFlag = !fileFlag;
         const [cwdErr] = await to(git.cwd(repoPath))
@@ -58,7 +58,7 @@ let autoSubmitCount = 1
   } catch (error) {
     console.error("推送失败:", error);
   }
-// });
+//});
 //随机数范围 [min , max]
 const random = (min, max) => {
   return Math.floor((max + 1 - min) * Math.random() + min)
