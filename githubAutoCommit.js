@@ -36,16 +36,16 @@ let autoSubmitCount = 23
       } else {
         fileFlag = !fileFlag;
         const [cwdErr] = await to(git.cwd(repoPath))
-        if (cwdErr) { console.log("初始化代码失败:", err) }
+        if (cwdErr) { console.log("初始化代码失败:", cwdErr) }
 
         const [addErr] = await to(git.add("./*"))
-        if (addErr) { console.log("添加代码失败:", err) }
+        if (addErr) { console.log("添加代码失败:", addErr) }
 
         const [commitErr] = await to(git.commit("style: 定时自动提交  🧐"))
-        if (commitErr) { console.log("提交代码失败:", err) }
+        if (commitErr) { console.log("提交代码失败:", commitErr) }
 
         const [pushErr] = await to(git.push("origin", "master"))
-        if (pushErr) { console.log("推送代码失败:", err) }
+        if (pushErr) { console.log("推送代码失败:", pushErr) }
         // await git.cwd(repoPath);
         // await git.add("./*");
         // await git.commit("style: 定时自动提交  🧐");
