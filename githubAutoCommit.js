@@ -27,7 +27,6 @@ cron.schedule("0 * * * *", async function ()  {
     return
   }
   
-  
   try {
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async function(err) {
@@ -46,13 +45,6 @@ cron.schedule("0 * * * *", async function ()  {
 
         const [pushErr] = await to(git.push("origin", "master"))
         if (pushErr) { console.log("推送代码失败:", pushErr) }
-        // await git.cwd(repoPath);
-        // await git.add("./*");
-        // await git.commit("style: 定时自动提交  🧐");
-        // await git.push("origin", "master").catch((err)=>{
-        //     console.log("提交代码失败:",err)
-        // });
-        // console.log("代码推送成功！");
       }
     });
   } catch (error) {
