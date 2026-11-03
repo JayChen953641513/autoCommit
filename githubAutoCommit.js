@@ -26,7 +26,27 @@ cron.schedule("0 * * * *", async function ()  {
   if (hour > autoSubmitCount) {
     return
   }
-  
+  //周末逻辑：
+  //周六60%不提交 提交次数5以下
+  //周日90%不提交 提交次数2以下
+  const isSaturday = new Date().getDay() === 6
+  const isSunDay = new Date().getDay() === 0
+  if (isSaturday) {
+    const saturdaySubmitRatio = random(0,100)
+    if(saturdaySubmitRatio<60){
+        return
+    }else{
+        autoSubmitCount = random(1, 5)
+    }
+  }
+  if (isSunDay) {
+    const sundaySubmitRatio = random(0,100)
+    if(sundaySubmitRatio<90){
+        return
+    }else{
+         autoSubmitCount = random(1, 2)
+    }
+  }
   try {
     console.log("开始推送代码到 git...");
     fs.writeFile(fileName, String(fileFlag), async function(err) {
